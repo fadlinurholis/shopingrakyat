@@ -2,7 +2,6 @@
 include './config.php';
 $page = 'HOME';
 ?>
-
 <!DOCTYPE html>
 <html lang="id">
 
@@ -20,35 +19,35 @@ $page = 'HOME';
 </head>
 
 <body>
-    
+    <!-- HEADER -->
     <?php include './partials/header.php'; ?>
+    <!-- HEADER -->
 
-
- 
+    <!-- CONTENT -->
     <div class="width">
-      
+        <!-- BANNER IKLAN -->
         <div class="banner_iklan">
-        <div class="banner_big_iklan">
-            <div class="owl-carousel owl-theme">
-            <?php
-                $banner_promo = $server->query("SELECT * FROM `banner_promo` ORDER BY `banner_promo`.`idbanner` DESC");
-                while ($banner_promo_data = mysqli_fetch_assoc($banner_promo)) {
-                ?>
-                <img src="./assets/image/banner/<?php echo $banner_promo_data['image']; ?>" class="img_banner_big_iklan">
-                <?php
-                }
+            <div class="banner_big_iklan">
+                <div class="owl-carousel owl-theme">
+                    <?php
+                    $banner_promo = $server->query("SELECT * FROM `banner_promo` ORDER BY `banner_promo`.`idbanner` DESC");
+                    while ($banner_promo_data = mysqli_fetch_assoc($banner_promo)) {
                     ?>
-            </div>
+                        <img src="./assets/image/banner/<?php echo $banner_promo_data['image']; ?>" class="img_banner_big_iklan">
+                    <?php
+                    }
+                    ?>
+                </div>
             </div>
         </div>
-    
+        <!-- KATEGORI -->
         <div class="box_kategori">
             <div class="kategori">
                 <?php
                 $kategori = $server->query("SELECT * FROM `kategori`");
                 while ($kategori_data = mysqli_fetch_assoc($kategori)) {
                 ?>
-                    <a href="category/list/<?php echo $kategori_data['id']; ?>">
+                    <a href="<?php echo $url; ?>category/list/<?php echo $kategori_data['id']; ?>">
                         <div class="isi_kategori">
                             <img src="./assets/icons/category/<?php echo $kategori_data['icon']; ?>">
                             <p><?php echo $kategori_data['nama']; ?></p>
@@ -59,8 +58,7 @@ $page = 'HOME';
                 ?>
             </div>
         </div>
-       
-
+        <!-- FLASH SALE -->
         <?php
         $select_fs = $server->query("SELECT * FROM `flashsale` WHERE `id_fs`='1' ");
         $data_fs = mysqli_fetch_assoc($select_fs);
@@ -97,7 +95,7 @@ $page = 'HOME';
                             $exp_gambar_fs = explode(',', $flash_sale_data['gambar']);
                         ?>
                             <div class="iklan_flash_sale">
-                                <a href="product/view/<?php echo $flash_sale_data['id']; ?>">
+                                <a href="<?php echo $url; ?>product/view/<?php echo $flash_sale_data['id']; ?>">
                                     <div class="box_persen_flashsale">
                                         <p>-<?php echo $flash_sale_data['diskon']; ?>%</p>
                                     </div>
@@ -109,9 +107,9 @@ $page = 'HOME';
                                             <div class="text_barang_flash_sale">
                                                 <p><?php echo $flash_sale_data['terjual']; ?> Terjual</p>
                                             </div>
-                                </div>
-                        </div>
-                    </a>
+                                        </div>
+                                    </div>
+                                </a>
                             </div>
                         <?php
                         }
@@ -123,7 +121,7 @@ $page = 'HOME';
         }
         ?>
 
-        
+        <!-- PRODUK TERBARU -->
         <div class="flash_sale">
             <div class="title_flash_sale">
                 <div class="box_title_produk_terlaris">
@@ -143,7 +141,7 @@ $page = 'HOME';
                     $exp_gambar_pt = explode(',', $produk_terlaris_data['gambar']);
                 ?>
                     <div class="list_produk">
-                        <a href="product/view/<?php echo $produk_terlaris_data['id']; ?>">
+                        <a href="<?php echo $url; ?>product/view/<?php echo $produk_terlaris_data['id']; ?>">
                             <img src="./assets/image/product/<?php echo $exp_gambar_pt[0]; ?>">
                             <div class="text_list_produk">
                                 <div class="box_judul_list_produk">
@@ -164,13 +162,18 @@ $page = 'HOME';
 		
 		
 
-       
+        <!-- PRODUK TERLARIS -->
         <div class="flash_sale">
             <div class="title_flash_sale">
                 <div class="box_title_produk_terlaris">
                     <p>Produk Terlaris </p>
                 </div>
-               
+                <!-- <a href="">
+                    <div class="box_lihat_semua">
+                        <p>Lihat Semua </p>
+                        <i class="ri-arrow-right-s-line"></i>
+                    </div>
+                </a> -->
             </div>
             <div class="box_iklan_flash_sale grid_terlaris">
                 <?php
@@ -179,7 +182,7 @@ $page = 'HOME';
                     $exp_gambar_pt = explode(',', $produk_terlaris_data['gambar']);
                 ?>
                     <div class="list_produk">
-                        <a href="product/view/<?php echo $produk_terlaris_data['id']; ?>">
+                        <a href="<?php echo $url; ?>product/view/<?php echo $produk_terlaris_data['id']; ?>">
                             <img src="./assets/image/product/<?php echo $exp_gambar_pt[0]; ?>">
                             <div class="text_list_produk">
                                 <div class="box_judul_list_produk">
@@ -200,19 +203,19 @@ $page = 'HOME';
 
     </div>
     <input type="hidden" id="time_count_flash_sale" value="<?php echo date("d M Y H:i:s", $wb_fs); ?>">
-    
+    <!-- CONTENT -->
 
-   
+    <!-- BOTTOM NAVIGATION -->
     <?php include './partials/bottom-navigation.php'; ?>
-  
+    <!-- BOTTOM NAVIGATION -->
 
-   
+    <!-- FOOTER -->
     <?php include './partials/footer.php'; ?>
-    
+    <!-- FOOTER -->
 
- 
+    <!-- JS -->
     <script src="./assets/js/index.js"></script>
-
+    <!-- JS -->
 </body>
 
 </html>>
